@@ -22,7 +22,7 @@ def load_encoder():
     - encoder: OneHotEncoder object
     """
     try:
-        with open('encoder.pkl', 'rb') as file:
+        with open('App.py/encoder.pkl', 'rb') as file:
             encoder = pickle.load(file)
         return encoder
     except Exception as e:
