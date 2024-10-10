@@ -4,7 +4,7 @@ import pickle
 
 def load_model():
     try:
-        with open('random_forest_model.pkl', 'rb') as file:
+        with open('App.py/random_forest_model.pkl', 'rb') as file:
             model = pickle.load(file)
         return model
     except Exception as e:
@@ -22,7 +22,7 @@ def load_encoder():
     - encoder: OneHotEncoder object
     """
     try:
-        with open('encoder.pkl', 'rb') as file:
+        with open('App.py/encoder.pkl', 'rb') as file:
             encoder = pickle.load(file)
         return encoder
     except Exception as e:
@@ -30,7 +30,7 @@ def load_encoder():
         return None
 
 # Load your dataset
-df = pd.read_csv('database.csv')
+df = pd.read_csv('App.py/database.csv')
 
 def pred_page():
     with st.expander("My DataFrame"):
