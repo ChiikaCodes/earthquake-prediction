@@ -1,13 +1,5 @@
-<<<<<<< HEAD
-scikit-learn
-streamlit
-streamlit-option-menu
-pandas
-seaborn
-matplotlib
-=======
+aiobotocore @ file:///C:/b/abs_3cwz1w13nn/croot/aiobotocore_1701291550158/work
 aiohttp @ file:///C:/b/abs_27h_1rpxgd/croot/aiohttp_1707342354614/work
-aiobotocore==1.4.0
 aioitertools @ file:///tmp/build/80754af9/aioitertools_1607109665762/work
 aiosignal @ file:///tmp/build/80754af9/aiosignal_1637843061372/work
 alabaster @ file:///home/ktietz/src/ci/alabaster_1611921544520/work
@@ -307,7 +299,7 @@ ruamel-yaml-conda @ file:///C:/ci_311/ruamel_yaml_1676455799258/work
 ruamel.yaml @ file:///C:/ci_311/ruamel.yaml_1676439214109/work
 s3fs @ file:///C:/b/abs_24vbfcawyu/croot/s3fs_1701294224436/work
 scikit-image @ file:///C:/b/abs_f7z1pjjn6f/croot/scikit-image_1707346180040/work
-scikit-learn @ file:///C:/b/abs_38k7ridbgr/croot/scikit-learn_1684954723009/work
+scikit-learn==1.5.2
 scipy==1.11.4
 Scrapy @ file:///C:/ci_311/scrapy_1678502587780/work
 seaborn @ file:///C:/ci_311/seaborn_1676446547861/work
@@ -344,7 +336,7 @@ tenacity @ file:///C:/b/abs_ddkoa9nju6/croot/tenacity_1682972298929/work
 terminado @ file:///C:/ci_311/terminado_1678228513830/work
 text-unidecode @ file:///Users/ktietz/demo/mc3/conda-bld/text-unidecode_1629401354553/work
 textdistance @ file:///tmp/build/80754af9/textdistance_1612461398012/work
-threadpoolctl @ file:///Users/ktietz/demo/mc3/conda-bld/threadpoolctl_1629802263681/work
+threadpoolctl==3.5.0
 three-merge @ file:///tmp/build/80754af9/three-merge_1607553261110/work
 tifffile @ file:///C:/b/abs_45o5chuqwt/croot/tifffile_1695107511025/work
 tinycss2 @ file:///C:/ci_311/tinycss2_1676425376744/work
@@ -391,4 +383,3 @@ zict @ file:///C:/b/abs_780gyydtbp/croot/zict_1695832899404/work
 zipp @ file:///C:/b/abs_b0beoc27oa/croot/zipp_1704206963359/work
 zope.interface @ file:///C:/ci_311/zope.interface_1676439868776/work
 zstandard==0.19.0
->>>>>>> 11247a9e1e08855897bb68403025a7fedbc0b249
