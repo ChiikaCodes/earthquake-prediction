@@ -1,13 +1,33 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import datetime
-
 
 def load_model():
-    with open('model.pkl', 'rb') as file:  # Use 'rb' to read the model
-        model = pickle.load(file)
-    return model
+    try:
+        with open('random_forest_model.pkl', 'rb') as file:
+            model = pickle.load(file)
+        return model
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        return None
+    
+def load_encoder():
+    """
+    Load the OneHotEncoder from the specified pickle file.
+    
+    Parameters:
+    - file_path: str, path to the pickle file
+    
+    Returns:
+    - encoder: OneHotEncoder object
+    """
+    try:
+        with open('encoder.pkl', 'rb') as file:
+            encoder = pickle.load(file)
+        return encoder
+    except Exception as e:
+        st.error(f"Error loading encoder: {e}")
+        return None
 
 # Load your dataset
 df = pd.read_csv('database.csv')
@@ -19,42 +39,55 @@ def pred_page():
     with st.sidebar:
         st.subheader('Input Features') 
         
-        selected_date = st.date_input("Select a date", datetime.date.today())
-
-        selected_time = st.time_input("Select a time", datetime.time(12, 0))
-
-        selected_datetime = datetime.datetime.combine(selected_date, selected_time)
-
-        # Extract year, month, and day
-        year = selected_datetime.year
-        month = selected_datetime.month
-        day = selected_datetime.day
-        
         # Input fields for longitude and latitude
-        longitude = st.number_input('Enter Longitude', value=0.0)
-        latitude = st.number_input('Enter Latitude', value=0.0)
-
-        Type = st.selectbox('Enter the Disaster Type', options=['Earthquake', 'Nuclear Explosion', 'Explosion', 'Rock Burst'])
+        latitude = st.slider("Latitude", min_value=df["Latitude"].min(), max_value=df["Latitude"].max(), value=df["Latitude"].mean())
+        longitude = st.slider("Longitude", min_value=df["Longitude"].min(), max_value=df["Longitude"].max(), value=df["Longitude"].mean())
+        Type = st.selectbox('Select Disaster Type', options=df['Type'].unique().tolist())
         Depth = st.slider('Depth', min_value=int(df['Depth'].min()), max_value=int(df['Depth'].max()), value=int(df['Depth'].mean()))
         Magnitude = st.slider('Magnitude', min_value=float(df['Magnitude'].min()), max_value=float(df['Magnitude'].max()), value=float(df['Magnitude'].mean()))
-
+        Magnitude_Type = st.selectbox('Select Magnitude Type', options=df['Magnitude Type'].unique().tolist())
+        
+        # Corrected line for Root Mean Square
+        Root_Mean_Square = st.slider(
+            'Root Mean Square',
+            min_value=int(df['Root Mean Square'].min()),
+            max_value=int(df['Root Mean Square'].max()),
+            value=int(df['Root Mean Square'].mean())
+        )
+        
+        Source = st.selectbox('Select Source', options=df['Source'].unique().tolist())
+        
+        encoder = load_encoder()
+        
         input_data = pd.DataFrame({
-            "Longitude": [longitude],
             "Latitude": [latitude],
-            "Disaster Type": [Type],
+            "Longitude": [longitude],
+            "Type": [Type],
             "Depth": [Depth],
             "Magnitude": [Magnitude],
-            "Year": [year],
-            "Month": [month],
-            "Day": [day]
+            "Magnitude Type": [Magnitude_Type],
+            "Root Mean Square": [Root_Mean_Square],
+            "Source": [Source]
         })
         
+        # Encode the categorical features using the loaded encoder
+        encoded_features = encoder.transform(input_data[['Type', 'Magnitude Type', 'Source']])
+
+        # Create a DataFrame from the encoded features
+        encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names_out(['Type', 'Magnitude Type', 'Source']))
+
+        # Concatenate the encoded features with the original input data
+        input_data = pd.concat([input_data.drop(['Type', 'Magnitude Type', 'Source'], axis=1), encoded_df], axis=1)
+        
+    st.dataframe(input_data)
+
         # Load the model
-        model = load_model()
+    model = load_model()
 
-        # Example of making a prediction (you need to adapt this to your model)
-        if st.button("Predict"):
-            prediction = model.predict(input_data)  # Make sure your model has a predict method
-            st.success(f'Prediction: {prediction}')
-
-pred_page()
+        # Make a prediction
+    if model is not None and st.button("Predict"):
+        try:
+            prediction = model.predict(input_data)
+            st.success(f'Prediction: {prediction[0]}')  # Assuming prediction returns an array
+        except Exception as e:
+            st.error(f"Error making prediction: {e}")

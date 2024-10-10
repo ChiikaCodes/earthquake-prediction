@@ -12,8 +12,7 @@ from prediction import pred_page
 
 # Sidebar menu
 with st.sidebar:
-    selected = option_menu(
-        menu_title=None,
+    selected = option_menu(        menu_title=None,
         options=['Home', 'Prediction'],
         icons=['house', 'graph-up-arrow'],
         menu_icon='cast',

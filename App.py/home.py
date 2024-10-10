@@ -30,9 +30,6 @@ def home_page():
     st.write("[US Geological Survey - Earthquake Hazards](https://www.usgs.gov/natural-hazards/earthquake-hazards)")
     st.write("[Earthquake Safety Tips](https://www.ready.gov/earthquakes)")
 
-    # Optional: Interactive button for navigation
-    if st.button("Go to Prediction Page"):
+    # Optional: Interactive button for navigation with a unique key
+    if st.button("Go to Prediction Page", key="go_to_prediction"):
         st.session_state.selected = 'Prediction'  # Assuming you handle navigation in the main app
-
-
-home_page()
