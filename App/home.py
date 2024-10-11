@@ -15,7 +15,7 @@ def home_page():
         3. Click **Submit** to get predictions based on your inputs.
     """)
 
-    st.image("App.py/broken-road-separating-into-two-parts-by-earthquake-city-ai-generative_123827-23739.jpg", caption="Earthquake Detection", use_column_width=True)
+    st.image("broken-road-separating-into-two-parts-by-earthquake-city-ai-generative_123827-23739.jpg", caption="Earthquake Detection", use_column_width=True)
 
     # Interesting facts
     st.subheader("Did You Know?")
