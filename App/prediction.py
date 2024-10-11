@@ -4,7 +4,7 @@ import pickle
 
 def load_model():
     try:
-        with open('random_forest_model.pkl', 'rb') as file:
+        with open('App/random_forest_model.pkl', 'rb') as file:
             model = pickle.load(file)
         return model
     except Exception as e:
@@ -13,7 +13,7 @@ def load_model():
     
 def load_encoder():
     try:
-        with open('encoder.pkl', 'rb') as file:
+        with open('App/encoder.pkl', 'rb') as file:
             encoder = pickle.load(file)
         return encoder
     except Exception as e:
@@ -21,7 +21,7 @@ def load_encoder():
         return None
 
 # Load your dataset
-df = pd.read_csv('database.csv')
+df = pd.read_csv('App/database.csv')
 
 def pred_page():
     with st.expander("My DataFrame"):
